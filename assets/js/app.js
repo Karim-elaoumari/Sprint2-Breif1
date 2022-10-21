@@ -99,6 +99,7 @@ function initTaskForm() {
               <button type="button" class="btn btn-secondary"  id="dismis" data-bs-dismiss="modal">Cancel</button>
               
               <button type="button" class="btn btn-primary" id="" onclick="saveTask();">Save</button>`;
+    staticBackdrop.reset();
 }
 /*-------------------------------------------------------------------------------------------------------------------*/
 function edit_task(clicked_id)
