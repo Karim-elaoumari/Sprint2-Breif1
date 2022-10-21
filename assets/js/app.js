@@ -94,135 +94,27 @@ function deleteTask(input) {
 /*-------------------------------------------------------------------------------------------------------------------*/
 function initTaskForm() {
     // Clear task form from data
-    staticBackdrop.innerHTML =`
-    <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Task</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modal_body">
-          <div class="mb-3 pt-2">
-              <label for="exampleFormControlInput1" class="form-label">Title</label>
-              <input type="text" class="form-control" id="form_title" placeholder="Enter card title"value minlength="3" maxlength="60" size="60" required>
-          </div>
-          <label for="exampleFormControlInput1" class="form-label">Type</label>
-          <div class="form-check mt-2 ms-2">
-            
-            <input type="radio" class="form-check-input" id="form_bug" name="radio-stacked" required>
-            <label class="form-check-label" for="validationFormCheck2">Bug</label>
-          </div>
-          <div class="form-check mb-4 ms-2">
-            <input type="radio" class="form-check-input" id="form_feature" name="radio-stacked" required>
-            <label class="form-check-label" for="validationFormCheck3">Feature</label>
-          </div>
-          <div class="col-md-4 w-100 mb-4">
-              <label for="inputState" class="form-label">Priority</label>
-              <select id="form_options_priority" class="form-select " required>
-              <option selected>Please select</option>
-              <option value="High">High</option>
-              <option value="medium">medium</option>
-              <option value="Low">Low</option>
-              </select>
-          </div>
-        
-          <div class="col-md-4 w-100 mb-4">
-              <label for="inputState" class="form-label">Status</label>
-              <select id="form_options_status" class="form-select " required>
-                <option selected>Please select</option>
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Done">Done</option>
-              </select>
-          </div>
-        
-          <div class="md-form md-outline input-with-post-icon datepicker mb-4">
-              <label for="inputState" class="form-label">Date</label>
-              <input placeholder="Select date" type="date" id="form_date" class="form-control" required>
-          </div>
-          <div class="form-group mb-4">
-              <label for="inputState" class="form-label">Description</label>
-              <textarea class="form-control" id="form_description" rows="3" required></textarea>
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"  id="dismis" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" onclick="saveTask()">Save</button>
-      </div>
-    </div>
-  </div>`;
-   
+    staticBackdropLabel.innerHTML= "Add Task";
+    modal_footer.innerHTML=`
+              <button type="button" class="btn btn-secondary"  id="dismis" data-bs-dismiss="modal">Cancel</button>
+              
+              <button type="button" class="btn btn-primary" id="" onclick="saveTask();">Save</button>`;
 }
 /*-------------------------------------------------------------------------------------------------------------------*/
 function edit_task(clicked_id)
 {
     // Initialisez task form
-    initTaskForm();
     for(let i of tasks){
         if(i.id==clicked_id){
           // Ouvrir modal form
-    var html = `
-    
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="">Task Edit</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3 pt-2">
-                    <label for="exampleFormControlInput1" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="form_title" value="${i.title}" minlength="3" maxlength="60" size="60" required>
-                </div>
-                <label for="exampleFormControlInput1" class="form-label">Type</label>
-                <div class="form-check mt-2 ms-2">
-                  
-                  <input type="radio" class="form-check-input" id="form_bug" name="radio-stacked"  required>
-                  <label class="form-check-label" for="validationFormCheck2">Bug</label>
-                </div>
-                <div class="form-check mb-4 ms-2">
-                  <input type="radio" class="form-check-input" id="form_feature" name="radio-stacked" required>
-                  <label class="form-check-label" for="validationFormCheck3">Feature</label>
-                </div>
-                <div class="col-md-4 w-100 mb-4">
-                    <label for="inputState" class="form-label">Priority</label>
-                    <select id="form_options_priority" class="form-select " required>
-                    <option selected>Please select</option>
-                    <option value="High">High</option>
-                    <option value="medium">medium</option>
-                    <option value="Low">Low</option>
-                    </select>
-                </div>
-              
-                <div class="col-md-4 w-100 mb-4">
-                    <label for="inputState" class="form-label">Status </label>
-                    <select id="form_options_status" class="form-select " required>
-                      <option selected>Please select</option>
-                      <option value="To Do">To Do</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Done">Done</option>
-                    </select>
-                </div>
-              
-                <div class="md-form md-outline input-with-post-icon datepicker mb-4">
-                    <label for="inputState" class="form-label">Date</label>
-                    <input placeholder="Select date" type="date" id="form_date" class="form-control" value="${i.date}"required>
-                </div>
-                <div class="form-group mb-4">
-                    <label for="inputState" class="form-label">Description</label>
-                    <textarea class="form-control" id="form_description" rows="3" required>${i.description}</textarea>
-                  </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              staticBackdropLabel.innerHTML= "Edit Task";
+              form_title.value=i.title;
+              form_date.value=i.date;
+              form_description.value = i.description;
+              modal_footer.innerHTML=`
+              <button type="button" class="btn btn-secondary"  id="dismis" data-bs-dismiss="modal">Cancel</button>
               <button type="button" class="btn btn-danger" id="${i.id}"  data-bs-dismiss="modal" onclick="deleteTask(this.id)">Delete</button>
-              <button type="button" class="btn btn-primary" id="${i.id}" onclick="updateTask(this.id)">Edit</button>
-              
-            </div>
-          </div>
-        </div>`;
-
-            staticBackdrop.innerHTML=html;
+              <button type="button" class="btn btn-primary" id="${i.id}" onclick="updateTask(this.id)">Edit</button>`;
             if(i.type=="Bug"){
               form_bug.checked = true;
             }
@@ -280,7 +172,7 @@ function reloadTasks() {
             var doing = document.getElementById("in_progress_tasks");
 
             var new_button = `
-                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;" draggable="true" id="${tasks[i].id}" >
+                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;"  id="${tasks[i].id}" >
 								<div class="col-1 pt-2">
 									<i class="spinner-border spinner-border-sm fs-2 text-green"></i> 
 								</div>
@@ -303,7 +195,7 @@ function reloadTasks() {
             var done = document.getElementById("done_tasks");
 
             var new_button = `
-                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;" draggable="true"  id="${tasks[i].id}" >
+                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;"  id="${tasks[i].id}" >
 								<div class="col-1 pt-2">
 									<i class="fa fa-check-circle fs-3 text-green"></i> 
 								</div>
