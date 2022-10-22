@@ -147,7 +147,7 @@ function reloadTasks() {
             
 
             var new_button = `
-                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item"  onClick="edit_task(this.id)" style="background-color:#EDE7E7;" id="${tasks[i].id}">
+                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item"  onClick="edit_task(this.id)" style="background-color:#EDE7E7;" id="${tasks[i].id}" draggable="true" ondrag="drag(event)">
 								<div class="col-1 pt-2">
 									<i class="fa fa-question-circle fs-3 text-green"></i> 
 								</div>
@@ -173,7 +173,7 @@ function reloadTasks() {
             var doing = document.getElementById("in_progress_tasks");
 
             var new_button = `
-                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;"  id="${tasks[i].id}" >
+                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;"  id="${tasks[i].id}" draggable="true" ondrag="drag(event)" >
 								<div class="col-1 pt-2">
 									<i class="spinner-border spinner-border-sm fs-2 text-green"></i> 
 								</div>
@@ -196,7 +196,7 @@ function reloadTasks() {
             var done = document.getElementById("done_tasks");
 
             var new_button = `
-                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;"  id="${tasks[i].id}" >
+                            <button class="border border-white  rounded text-start border-secondary mb-3 w-100 d-flex item" onClick="edit_task(this.id)" style="background-color:#EDE7E7" style="background-color:#EDE7E7;"  id="${tasks[i].id}" draggable="true" ondrag="drag(event)">
 								<div class="col-1 pt-2">
 									<i class="fa fa-check-circle fs-3 text-green"></i> 
 								</div>
@@ -221,48 +221,65 @@ function reloadTasks() {
             done_tasks_count.innerHTML=donee;
             in_progress_tasks_count.innerHTML=doingg;
             to_do_tasks_count.innerHTML=todoo;
-            // drag_item();
+            
 
     }
 }
-// function drag_item(){
-//   let drag =null;
-//   let items = document.querySelectorAll(".item");
-//   let boses = document.querySelectorAll(".boxe");
-//   items.forEach(item=>{
-//     item.addEventListener('dragstart',function(){
+
+function allowDrop(e){
+  e.preventDefault();
+}
+
+// Global Variable: 
+let indexToMove;
+// GETS THE ID OF THE DRAGED ELEMENT
+function drag(e)
+{
+  e.preventDefault();
+  indexToMove= e.target.id;
+}
+
+// THIS Fct GETS TRIG IF THE ELEMENT CALLED IN WAS THE DROP TARGET
+function dropedInProgress(e)
+{
+  for(let i in tasks){
+    if(tasks[i].id==indexToMove){
+      if(tasks[i].status == "In Progress"){
+      }
+      else{
+        tasks[i].status = "In Progress";
+        reloadTasks();
+      }
+      
+
+      
+    }
+}}
+
+// THIS Fct GETS TRIG IF THE ELEMENT CALLED IN WAS THE DROP TARGET
+function dropedToDo(e)
+{
+  for(let i in tasks){
+    if(tasks[i].id==indexToMove){
+      if(tasks[i].status == "To Do"){}
+      else{
+        tasks[i].status = "To Do";
+        reloadTasks();}
       
       
-//       drag =this.id;
-//       item.style.opacity = '0.5';
-//       console.log("evjide");
+    }
+  }
+}
 
-//     });
-//     item.addEventListener('dragend',function(e){
-//       e.preventDefault();
-//       console.log("karim");
-//       item.style.opacity = '1';
-//       drag = null;
-
-//     });
-//     boses.forEach(boxe=>{
-//       boxe.addEventListener('dragover', function(){
-//         console.log("halloween");
-
-//       });
-//       boxe.addEventListener('dragleave', function(){
-//         console.log("gaavvi");
-
-//       });
-//       boxe.addEventListener('drop', function(){
-//         console.log("gaavvi");
-        
-        
-
-//       });
-
-
-//     });
-//   });
-
-// }
+// THIS Fct GETS TRIG IF THE ELEMENT CALLED IN WAS THE DROP TARGET
+function dropedDone(e)
+{
+  for(let i in tasks){
+    if(tasks[i].id==indexToMove){
+      if(tasks[i].status =="Done"){}
+      else{
+        tasks[i].status = "Done";
+        reloadTasks();}
+    }
+  }
+}

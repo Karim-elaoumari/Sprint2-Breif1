@@ -15,7 +15,7 @@
 	<link href="assets/css/style.css" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js" integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
 	
 	<!-- ================== END core-css ================== -->
 </head>
@@ -42,7 +42,7 @@
 				
 				<div class="">
 					  
-					<button type="button" class=" btn btn-outline-primary rounded-pill" onclick="initTaskForm()"data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-plus pe-2"> </i>Add Task</button>
+					<button type="button" class=" btn btn-outline-primary rounded-pill" onclick="initTaskForm()" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-plus pe-2"> </i>Add Task</button>
 				</div>
 				
 			</div>
@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			
-			<div class=" row justify-content-around ">
+			<div class=" row justify-content-around " >
 				
 				<!-- <div class="card w-25 shadow p-2 mb-5" style="min-width: 18rem;"> -->
 				<div class=" card col-lg-3 col-sm-6 mb-3"style="min-width:300px;">
@@ -68,7 +68,7 @@
 							<h4 class="p-2">To do (<span id="to_do_tasks_count">5</span>)</h4>
 
 						</div>
-						<div class="wrapperr" id="to_do_tasks" >
+						<div class="wrapperr" id="to_do_tasks" ondragover="allowDrop(event)" ondrop="dropedToDo(event)">
 							<!-- TO DO TASKS HERE -->
 						
 						</div>
@@ -80,7 +80,7 @@
 							<h4 class="p-2">In Progress (<span id="in_progress_tasks_count">4</span>)</h4>
 
 						</div>
-						<div class="wrappere" id="in_progress_tasks">
+						<div class="wrappere" id="in_progress_tasks" ondragover="allowDrop(event)" ondrop="dropedInProgress(event)">
 							<!-- IN PROGRESS TASKS HERE -->
 							
 						</div>
@@ -92,7 +92,7 @@
 							<h4 class="p-2">Done (<span id="done_tasks_count">4</span>)</h4>
 
 						</div>
-						<div class="wrapper" id="done_tasks">
+						<div class="wrapper" id="done_tasks" ondragover="allowDrop(event)" ondrop="dropedDone(event)">
 							<!-- DONE TASKS HERE -->
 							
 						</div>
